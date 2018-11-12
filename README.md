@@ -18,8 +18,6 @@ and at minimum the media_player entry and options entered into configuration.yam
 
 Note: You may have to try a couple times to get the Captcha to work...just enter a few random letters and submit for a fresh photo.
 
-**A Special Thank You! to Keaton Taylor for this amazing script, without it none of this would be possible.**
-
 ***If you haven't joined the DrZzs Home Automation and Tech Hacks facebook group and found this by other means...please join!***
 
 Obviously...this is all set to my devices and their respective names...you will have to put quite a bit of work in on your end.
