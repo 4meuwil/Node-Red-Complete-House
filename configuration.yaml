@@ -1,4 +1,5 @@
- - platform: mjpeg
+camera:
+- platform: mjpeg
    mjpeg_url: http://BLURIRISADDRESS:PORT/mjpg/YOURCAMERA'SHORTNAME'
    name: Porch
    username: !secret blue_iris_user
