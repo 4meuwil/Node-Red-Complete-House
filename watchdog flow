@@ -218,7 +218,7 @@
         "server": "smtp.gmail.com",
         "port": "465",
         "secure": true,
-        "name": "4meuwil@gmail.com",
+        "name": "YOUREMAIL@gmail.com",
         "dname": "email",
         "x": 800,
         "y": 480,
