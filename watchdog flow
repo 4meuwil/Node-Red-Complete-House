@@ -1,0 +1,1941 @@
+[
+    {
+        "id": "9c076f90.c4bef",
+        "type": "tab",
+        "label": "Watchdog",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "8a805647.fc7ac8",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "hassio",
+        "service": "snapshot_full",
+        "data": "",
+        "mergecontext": "",
+        "x": 320,
+        "y": 75,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e864bbbc.923f38",
+        "type": "inject",
+        "z": "9c076f90.c4bef",
+        "name": "1am Tues&Fri",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "00 01 * * 2,5",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 95,
+        "y": 75,
+        "wires": [
+            [
+                "8a805647.fc7ac8"
+            ]
+        ]
+    },
+    {
+        "id": "348ae82d.3a07a8",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Node Red",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "toggle",
+        "data": "{\"entity_id\": \"input_boolean.node_red\"}",
+        "mergecontext": "",
+        "x": 255,
+        "y": 165,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9983ea81.f39718",
+        "type": "server-state-changed",
+        "z": "9c076f90.c4bef",
+        "name": "Node Red",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "input_boolean.node_red",
+        "entityidfiltertype": "substring",
+        "haltifstate": "",
+        "outputinitially": false,
+        "x": 75,
+        "y": 195,
+        "wires": [
+            [
+                "dd03e721.356dd8"
+            ]
+        ]
+    },
+    {
+        "id": "dd03e721.356dd8",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "OK",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "OK",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 245,
+        "y": 195,
+        "wires": [
+            [
+                "9ca7475d.e10598"
+            ]
+        ]
+    },
+    {
+        "id": "9ca7475d.e10598",
+        "type": "mqtt out",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "topic": "checkIn/nodeRED",
+        "qos": "0",
+        "retain": "",
+        "broker": "3a69e582.e2abba",
+        "x": 435,
+        "y": 195,
+        "wires": []
+    },
+    {
+        "id": "9860c514.22c198",
+        "type": "inject",
+        "z": "9c076f90.c4bef",
+        "name": "Every Minute",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 95,
+        "y": 165,
+        "wires": [
+            [
+                "348ae82d.3a07a8"
+            ]
+        ]
+    },
+    {
+        "id": "1134725b.23a7fe",
+        "type": "ping",
+        "z": "9c076f90.c4bef",
+        "name": "Front Yard Camera",
+        "host": "192.168.1.191",
+        "timer": "600",
+        "x": 105,
+        "y": 300,
+        "wires": [
+            [
+                "9b978f89.2948"
+            ]
+        ]
+    },
+    {
+        "id": "f0fc125f.3fe11",
+        "type": "ping",
+        "z": "9c076f90.c4bef",
+        "name": "Driveway Camera",
+        "host": "192.168.1.192",
+        "timer": "600",
+        "x": 105,
+        "y": 330,
+        "wires": [
+            [
+                "5710214.b75d5e"
+            ]
+        ]
+    },
+    {
+        "id": "5a282902.35a1d8",
+        "type": "ping",
+        "z": "9c076f90.c4bef",
+        "name": "Side Yard Camera",
+        "host": "192.168.1.193",
+        "timer": "600",
+        "x": 105,
+        "y": 360,
+        "wires": [
+            [
+                "6ee65484.670d0c"
+            ]
+        ]
+    },
+    {
+        "id": "abf7ba76.7abc98",
+        "type": "ping",
+        "z": "9c076f90.c4bef",
+        "name": "Back Yard Camera",
+        "host": "192.168.1.194",
+        "timer": "600",
+        "x": 105,
+        "y": 390,
+        "wires": [
+            [
+                "e4475aec.2b3d58"
+            ]
+        ]
+    },
+    {
+        "id": "b976268f.c5d498",
+        "type": "ping",
+        "z": "9c076f90.c4bef",
+        "name": "Porch Camera",
+        "host": "192.168.1.195",
+        "timer": "600",
+        "x": 85,
+        "y": 420,
+        "wires": [
+            [
+                "2128e92c.674da6"
+            ]
+        ]
+    },
+    {
+        "id": "fe72a181.fe9d7",
+        "type": "e-mail",
+        "z": "9c076f90.c4bef",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "name": "4meuwil@gmail.com",
+        "dname": "email",
+        "x": 800,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "c7b75671.ca9ef8",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Front Yard Camera Not Responding",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 300,
+        "wires": [
+            [
+                "fe72a181.fe9d7"
+            ]
+        ]
+    },
+    {
+        "id": "65eaff84.9deee",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 300,
+        "wires": [
+            [
+                "c7b75671.ca9ef8"
+            ]
+        ]
+    },
+    {
+        "id": "fa21fb41.3997e8",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Driveway Camera Not Responding",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 330,
+        "wires": [
+            [
+                "fe72a181.fe9d7"
+            ]
+        ]
+    },
+    {
+        "id": "862c3786.3d7fe8",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 330,
+        "wires": [
+            [
+                "fa21fb41.3997e8"
+            ]
+        ]
+    },
+    {
+        "id": "b5cbb1a8.3cda7",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Side Yard Camera Not Responding",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 360,
+        "wires": [
+            [
+                "fe72a181.fe9d7"
+            ]
+        ]
+    },
+    {
+        "id": "75632278.c0626c",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 360,
+        "wires": [
+            [
+                "b5cbb1a8.3cda7"
+            ]
+        ]
+    },
+    {
+        "id": "42269be1.f8ad64",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Front Yard Camera Not Responding",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 390,
+        "wires": [
+            [
+                "fe72a181.fe9d7"
+            ]
+        ]
+    },
+    {
+        "id": "89950ab1.13c8f8",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 390,
+        "wires": [
+            [
+                "42269be1.f8ad64"
+            ]
+        ]
+    },
+    {
+        "id": "903f7296.ebdd1",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Porch Camera Not Responding",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 420,
+        "wires": [
+            [
+                "fe72a181.fe9d7"
+            ]
+        ]
+    },
+    {
+        "id": "73262046.ecfc3",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 420,
+        "wires": [
+            [
+                "903f7296.ebdd1"
+            ]
+        ]
+    },
+    {
+        "id": "1c912195.f4dc8e",
+        "type": "ping",
+        "z": "9c076f90.c4bef",
+        "name": "Alarm 1",
+        "host": "192.168.1.150",
+        "timer": "600",
+        "x": 65,
+        "y": 645,
+        "wires": [
+            [
+                "e236673d.072c38"
+            ]
+        ]
+    },
+    {
+        "id": "def98c3.dea7b7",
+        "type": "ping",
+        "z": "9c076f90.c4bef",
+        "name": "Alarm 2",
+        "host": "192.168.1.151",
+        "timer": "600",
+        "x": 65,
+        "y": 675,
+        "wires": [
+            [
+                "bee479fb.8becf8"
+            ]
+        ]
+    },
+    {
+        "id": "9b978f89.2948",
+        "type": "switch",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 275,
+        "y": 300,
+        "wires": [
+            [
+                "65eaff84.9deee",
+                "f0a806d3.d11d08"
+            ],
+            [
+                "b4297160.218ff"
+            ]
+        ]
+    },
+    {
+        "id": "5710214.b75d5e",
+        "type": "switch",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 275,
+        "y": 330,
+        "wires": [
+            [
+                "862c3786.3d7fe8",
+                "f0a806d3.d11d08"
+            ],
+            [
+                "b4297160.218ff"
+            ]
+        ]
+    },
+    {
+        "id": "6ee65484.670d0c",
+        "type": "switch",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 275,
+        "y": 360,
+        "wires": [
+            [
+                "75632278.c0626c",
+                "f0a806d3.d11d08"
+            ],
+            [
+                "b4297160.218ff"
+            ]
+        ]
+    },
+    {
+        "id": "e4475aec.2b3d58",
+        "type": "switch",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 275,
+        "y": 390,
+        "wires": [
+            [
+                "89950ab1.13c8f8",
+                "f0a806d3.d11d08"
+            ],
+            [
+                "b4297160.218ff"
+            ]
+        ]
+    },
+    {
+        "id": "2128e92c.674da6",
+        "type": "switch",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 275,
+        "y": 420,
+        "wires": [
+            [
+                "73262046.ecfc3",
+                "f0a806d3.d11d08"
+            ],
+            [
+                "b4297160.218ff"
+            ]
+        ]
+    },
+    {
+        "id": "e236673d.072c38",
+        "type": "switch",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 275,
+        "y": 645,
+        "wires": [
+            [
+                "437bc73f.001c68",
+                "1a6843d9.ce450c"
+            ],
+            [
+                "bda9d6be.9814b8"
+            ]
+        ]
+    },
+    {
+        "id": "bee479fb.8becf8",
+        "type": "switch",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 275,
+        "y": 675,
+        "wires": [
+            [
+                "7c5f396b.291168",
+                "1a6843d9.ce450c"
+            ],
+            [
+                "bda9d6be.9814b8"
+            ]
+        ]
+    },
+    {
+        "id": "1335c6ac.f02ba9",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Alarm 1 Not Responding",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 645,
+        "wires": [
+            [
+                "7af7afdc.905a8"
+            ]
+        ]
+    },
+    {
+        "id": "437bc73f.001c68",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 645,
+        "wires": [
+            [
+                "1335c6ac.f02ba9"
+            ]
+        ]
+    },
+    {
+        "id": "7c5f396b.291168",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 675,
+        "wires": [
+            [
+                "6305657.abddc9c"
+            ]
+        ]
+    },
+    {
+        "id": "6305657.abddc9c",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Alarm 2 Not Responding",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 675,
+        "wires": [
+            [
+                "7af7afdc.905a8"
+            ]
+        ]
+    },
+    {
+        "id": "36ac512d.631ade",
+        "type": "comment",
+        "z": "9c076f90.c4bef",
+        "name": "Hassio Automatic Backup",
+        "info": "",
+        "x": 125,
+        "y": 30,
+        "wires": []
+    },
+    {
+        "id": "78f1af8f.0d8b8",
+        "type": "comment",
+        "z": "9c076f90.c4bef",
+        "name": "Node Red Watchdog",
+        "info": "",
+        "x": 105,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "454de525.d976ac",
+        "type": "comment",
+        "z": "9c076f90.c4bef",
+        "name": "IP Cameras Watchdog - Ping Every 10 Minutes",
+        "info": "",
+        "x": 195,
+        "y": 255,
+        "wires": []
+    },
+    {
+        "id": "8254507a.ee3ed",
+        "type": "comment",
+        "z": "9c076f90.c4bef",
+        "name": "Konnected Watchdog - Ping Every 10 Minutes",
+        "info": "",
+        "x": 185,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "bda9d6be.9814b8",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 735,
+        "wires": [
+            [
+                "39c1de04.3c7582"
+            ]
+        ]
+    },
+    {
+        "id": "39c1de04.3c7582",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Alarms Online",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "data": "{ \"entity_id\": \"input_boolean.alarm_check\" }",
+        "mergecontext": "",
+        "x": 590,
+        "y": 735,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1a6843d9.ce450c",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 765,
+        "wires": [
+            [
+                "66ae765f.b5a5e8"
+            ]
+        ]
+    },
+    {
+        "id": "66ae765f.b5a5e8",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Alarms Offline",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "data": "{ \"entity_id\": \"input_boolean.alarm_check\" }",
+        "mergecontext": "",
+        "x": 590,
+        "y": 765,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b4297160.218ff",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 465,
+        "wires": [
+            [
+                "bd6d9673.86d758"
+            ]
+        ]
+    },
+    {
+        "id": "bd6d9673.86d758",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Cameras Online",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "data": "{ \"entity_id\": \"input_boolean.camera_check\" }",
+        "mergecontext": "",
+        "x": 590,
+        "y": 465,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f0a806d3.d11d08",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 495,
+        "wires": [
+            [
+                "207f03b1.b1acec"
+            ]
+        ]
+    },
+    {
+        "id": "207f03b1.b1acec",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Cameras Offline",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "data": "{ \"entity_id\": \"input_boolean.camera_check\" }",
+        "mergecontext": "",
+        "x": 590,
+        "y": 495,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "47990f28.66f89",
+        "type": "comment",
+        "z": "9c076f90.c4bef",
+        "name": "Temp Sensors Watchdog - Ping Every 10 Minutes",
+        "info": "",
+        "x": 195,
+        "y": 870,
+        "wires": []
+    },
+    {
+        "id": "44f70889.d69568",
+        "type": "poll-state",
+        "z": "9c076f90.c4bef",
+        "name": "Downstairs Temp",
+        "server": "43c6abca.ce6fb4",
+        "updateinterval": "300",
+        "outputinitially": false,
+        "outputonchanged": false,
+        "entity_id": "sensor.downstairs_temp",
+        "x": 95,
+        "y": 1305,
+        "wires": [
+            [
+                "57f48a91.b577f4"
+            ]
+        ]
+    },
+    {
+        "id": "57f48a91.b577f4",
+        "type": "switch",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "75",
+                "vt": "num"
+            },
+            {
+                "t": "lt",
+                "v": "67",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 245,
+        "y": 1305,
+        "wires": [
+            [
+                "71b1e0e4.5a4dd"
+            ],
+            [
+                "8d016c87.3756d"
+            ]
+        ]
+    },
+    {
+        "id": "4996b46f.0bac6c",
+        "type": "ping",
+        "z": "9c076f90.c4bef",
+        "name": "Upstairs Ping",
+        "host": "192.168.1.152",
+        "timer": "600",
+        "x": 85,
+        "y": 1065,
+        "wires": [
+            [
+                "c755dd3f.bc135"
+            ]
+        ]
+    },
+    {
+        "id": "c755dd3f.bc135",
+        "type": "switch",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 275,
+        "y": 1065,
+        "wires": [
+            [
+                "cc04349a.045118",
+                "d352d6bf.d8c8a8"
+            ],
+            [
+                "e1de9c58.049ff"
+            ]
+        ]
+    },
+    {
+        "id": "cc04349a.045118",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 1065,
+        "wires": [
+            [
+                "bab60c95.03f3c"
+            ]
+        ]
+    },
+    {
+        "id": "bab60c95.03f3c",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Upstairs Temp Not Responding",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 1065,
+        "wires": [
+            [
+                "de81ec9.49cad1"
+            ]
+        ]
+    },
+    {
+        "id": "de81ec9.49cad1",
+        "type": "e-mail",
+        "z": "9c076f90.c4bef",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "name": "YOUREMAIL@gmail.com",
+        "dname": "email",
+        "x": 800,
+        "y": 1065,
+        "wires": []
+    },
+    {
+        "id": "17aab8a7.414a87",
+        "type": "function",
+        "z": "9c076f90.c4bef",
+        "name": "Hot",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Uh Oh! It is HOT Upstairs!',\n    \"data\": \n    {\n      \"push\": \n      {\n        \"badge\": 0,\n        \"category\": \"temp\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 560,
+        "y": 1290,
+        "wires": [
+            [
+                "54121ba6.642624"
+            ]
+        ]
+    },
+    {
+        "id": "54121ba6.642624",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Jake",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_jakes_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 725,
+        "y": 1290,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bcfc0cfa.2573a",
+        "type": "function",
+        "z": "9c076f90.c4bef",
+        "name": "Cold",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Uh Oh! It is COLD Upstairs!',\n    \"data\": \n    {\n      \"push\": \n      {\n        \"badge\": 0,\n        \"category\": \"temp\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 560,
+        "y": 1320,
+        "wires": [
+            [
+                "54121ba6.642624"
+            ]
+        ]
+    },
+    {
+        "id": "e1de9c58.049ff",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 1110,
+        "wires": [
+            [
+                "55ed3ad0.4c7894"
+            ]
+        ]
+    },
+    {
+        "id": "55ed3ad0.4c7894",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Temp Online",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "data": "{\"entity_id\":\"input_boolean.tempsensor_check\"}",
+        "mergecontext": "",
+        "x": 580,
+        "y": 1110,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d352d6bf.d8c8a8",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 1140,
+        "wires": [
+            [
+                "78fc57fd.ef1b18"
+            ]
+        ]
+    },
+    {
+        "id": "78fc57fd.ef1b18",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Temp Offline",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "data": "{ \"entity_id\": \"input_boolean.tempsensor_check\" }",
+        "mergecontext": "",
+        "x": 580,
+        "y": 1140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "71b1e0e4.5a4dd",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "30",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 1290,
+        "wires": [
+            [
+                "17aab8a7.414a87"
+            ]
+        ]
+    },
+    {
+        "id": "8d016c87.3756d",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "30",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 1320,
+        "wires": [
+            [
+                "bcfc0cfa.2573a"
+            ]
+        ]
+    },
+    {
+        "id": "bf6fbe81.93bbd",
+        "type": "trigger-state",
+        "z": "9c076f90.c4bef",
+        "name": "Back Online",
+        "server": "43c6abca.ce6fb4",
+        "entityid": "input_boolean.tempsensor_check",
+        "debugenabled": false,
+        "constraints": [
+            {
+                "id": "w3e5h5biu1",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "previous_state",
+                "propertyValue": "old_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "on"
+            },
+            {
+                "id": "x0jy0wvfz9p",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "current_state",
+                "propertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "off"
+            }
+        ],
+        "constraintsmustmatch": "all",
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "x": 85,
+        "y": 1185,
+        "wires": [
+            [
+                "f9072496.ac7328"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f9072496.ac7328",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 1185,
+        "wires": [
+            [
+                "a03c4521.6ff908"
+            ]
+        ]
+    },
+    {
+        "id": "a03c4521.6ff908",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Upstairs Temp Back Online",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 1185,
+        "wires": [
+            [
+                "de81ec9.49cad1"
+            ]
+        ]
+    },
+    {
+        "id": "79c303a3.2b8d7c",
+        "type": "trigger-state",
+        "z": "9c076f90.c4bef",
+        "name": "Back Online",
+        "server": "43c6abca.ce6fb4",
+        "entityid": "input_boolean.camera_check",
+        "debugenabled": false,
+        "constraints": [
+            {
+                "id": "w3e5h5biu1",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "previous_state",
+                "propertyValue": "old_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "on"
+            },
+            {
+                "id": "x0jy0wvfz9p",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "current_state",
+                "propertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "off"
+            }
+        ],
+        "constraintsmustmatch": "all",
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "x": 85,
+        "y": 540,
+        "wires": [
+            [
+                "9bf5349e.150bd8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "9bf5349e.150bd8",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 540,
+        "wires": [
+            [
+                "ffd5ddbb.fbca8"
+            ]
+        ]
+    },
+    {
+        "id": "ffd5ddbb.fbca8",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Cameras Back Online",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 540,
+        "wires": [
+            [
+                "fe72a181.fe9d7"
+            ]
+        ]
+    },
+    {
+        "id": "7af7afdc.905a8",
+        "type": "e-mail",
+        "z": "9c076f90.c4bef",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "name": "YOUREMAIL@gmail.com",
+        "dname": "email",
+        "x": 800,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "36d343a3.712c3c",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Alarms Back Online",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 810,
+        "wires": [
+            [
+                "7af7afdc.905a8"
+            ]
+        ]
+    },
+    {
+        "id": "de5874fd.7bf4a8",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 810,
+        "wires": [
+            [
+                "36d343a3.712c3c"
+            ]
+        ]
+    },
+    {
+        "id": "21d8d2a8.72f1de",
+        "type": "trigger-state",
+        "z": "9c076f90.c4bef",
+        "name": "Back Online",
+        "server": "43c6abca.ce6fb4",
+        "entityid": "input_boolean.alarm_check",
+        "debugenabled": false,
+        "constraints": [
+            {
+                "id": "w3e5h5biu1",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "previous_state",
+                "propertyValue": "old_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "on"
+            },
+            {
+                "id": "x0jy0wvfz9p",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "current_state",
+                "propertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "off"
+            }
+        ],
+        "constraintsmustmatch": "all",
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "x": 85,
+        "y": 810,
+        "wires": [
+            [
+                "de5874fd.7bf4a8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "7d6e6927.78efc8",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Mandy",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_mandys_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 725,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1ecf05cb.60065a",
+        "type": "comment",
+        "z": "9c076f90.c4bef",
+        "name": "Temp Sensors Watchdog - Temp Notifications",
+        "info": "",
+        "x": 185,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "18187a74.e2ab46",
+        "type": "poll-state",
+        "z": "9c076f90.c4bef",
+        "name": "Upstairs Temp",
+        "server": "43c6abca.ce6fb4",
+        "updateinterval": "300",
+        "outputinitially": false,
+        "outputonchanged": false,
+        "entity_id": "sensor.upstairs_temp",
+        "x": 85,
+        "y": 1380,
+        "wires": [
+            [
+                "a099bb73.f0a6d8"
+            ]
+        ]
+    },
+    {
+        "id": "a099bb73.f0a6d8",
+        "type": "switch",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "75",
+                "vt": "num"
+            },
+            {
+                "t": "lt",
+                "v": "67",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 245,
+        "y": 1380,
+        "wires": [
+            [
+                "44fbf2f4.17332c"
+            ],
+            [
+                "930a7ede.a5a0c"
+            ]
+        ]
+    },
+    {
+        "id": "ed23ff32.d78ae",
+        "type": "function",
+        "z": "9c076f90.c4bef",
+        "name": "Hot",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Uh Oh! It is HOT Upstairs!',\n    \"data\": \n    {\n      \"push\": \n      {\n        \"badge\": 0,\n        \"category\": \"temp\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 560,
+        "y": 1365,
+        "wires": [
+            [
+                "862a9390.50e92",
+                "10748c73.dc0e14"
+            ]
+        ]
+    },
+    {
+        "id": "862a9390.50e92",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Jake",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_jakes_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 725,
+        "y": 1365,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "43b4ea49.cc4ba4",
+        "type": "function",
+        "z": "9c076f90.c4bef",
+        "name": "Cold",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Uh Oh! It is COLD Upstairs!',\n    \"data\": \n    {\n      \"push\": \n      {\n        \"badge\": 0,\n        \"category\": \"temp\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 560,
+        "y": 1395,
+        "wires": [
+            [
+                "862a9390.50e92",
+                "10748c73.dc0e14"
+            ]
+        ]
+    },
+    {
+        "id": "44fbf2f4.17332c",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "30",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 1365,
+        "wires": [
+            [
+                "ed23ff32.d78ae"
+            ]
+        ]
+    },
+    {
+        "id": "930a7ede.a5a0c",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "30",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 1395,
+        "wires": [
+            [
+                "43b4ea49.cc4ba4"
+            ]
+        ]
+    },
+    {
+        "id": "10748c73.dc0e14",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Mandy",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_mandys_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 725,
+        "y": 1395,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d410b1e6.f4056",
+        "type": "ping",
+        "z": "9c076f90.c4bef",
+        "name": "Downstairs Ping",
+        "host": "192.168.1.151",
+        "timer": "600",
+        "x": 95,
+        "y": 945,
+        "wires": [
+            [
+                "8fb37e82.3ab58"
+            ]
+        ]
+    },
+    {
+        "id": "8fb37e82.3ab58",
+        "type": "switch",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 275,
+        "y": 945,
+        "wires": [
+            [
+                "56b5dac9.02a024",
+                "ad4dd01a.10514"
+            ],
+            [
+                "3fa66820.c54e48"
+            ]
+        ]
+    },
+    {
+        "id": "56b5dac9.02a024",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "hours",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 945,
+        "wires": [
+            [
+                "8b0f3c77.26a91"
+            ]
+        ]
+    },
+    {
+        "id": "8b0f3c77.26a91",
+        "type": "change",
+        "z": "9c076f90.c4bef",
+        "name": "email",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Downstairs Temp Not Responding",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 945,
+        "wires": [
+            [
+                "de81ec9.49cad1"
+            ]
+        ]
+    },
+    {
+        "id": "3fa66820.c54e48",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 990,
+        "wires": [
+            [
+                "3f6a968.60ea26a"
+            ]
+        ]
+    },
+    {
+        "id": "3f6a968.60ea26a",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Temp Online",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "data": "{\"entity_id\":\"input_boolean.tempsensor_check\"}",
+        "mergecontext": "",
+        "x": 580,
+        "y": 990,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad4dd01a.10514",
+        "type": "throttle",
+        "z": "9c076f90.c4bef",
+        "name": "",
+        "throttleType": "time",
+        "timeLimit": "1",
+        "timeLimitType": "minutes",
+        "countLimit": 0,
+        "blockSize": 0,
+        "locked": false,
+        "x": 425,
+        "y": 1020,
+        "wires": [
+            [
+                "77911bac.1e66d4"
+            ]
+        ]
+    },
+    {
+        "id": "77911bac.1e66d4",
+        "type": "api-call-service",
+        "z": "9c076f90.c4bef",
+        "name": "Temp Offline",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "data": "{ \"entity_id\": \"input_boolean.tempsensor_check\" }",
+        "mergecontext": "",
+        "x": 580,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "43c6abca.ce6fb4",
+        "type": "server",
+        "z": "",
+        "name": "Home Assistant",
+        "legacy": false
+    },
+    {
+        "id": "3a69e582.e2abba",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "MQTT",
+        "broker": "YOURBROKERIP",
+        "port": "YOURBROKERPORT",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
