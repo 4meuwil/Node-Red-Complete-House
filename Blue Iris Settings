@@ -1,0 +1,8 @@
+In Blue Iris, you'll need to configure a couple things for Node Red to work..
+
+Set up the MQTT section in main "Options/Digital IO and IoT/MQTT configure" and enter your creditials...then test for connection.
+
+In each camera properties go to the alerts tab, select fire when: "this camera is triggered" and check "external" option (important).
+
+Again on alerts tab, check "post to a web address or MQTT server", configure, then choose "MQTT Topic" instead of http.
+In the details I use topics like "Blueiris-Porch" with a payload of "trigger". I have "delay between messages" disabled and no reset message.
