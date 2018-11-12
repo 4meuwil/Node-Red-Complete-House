@@ -1,1 +1,156 @@
+input_boolean:
+  panic:
+    name: Panic!
+    icon: mdi:alert-box
+    initial: off
+  node_red:
+    name: Node Red Watchdog
+    initial: on
+  YOURSECRETDISARMBOOLEAN:
+    name: YOURSECRETDISARMBOOLEAN
+    initial: off
+  house_check:
+    name: House Check
+    initial: off
+  fam_leaving:
+    name: Family Leaving
+    initial: off
+  alarm_check:
+    name: Alarm Check
+    initial: off
+  camera_check:
+    name: Camera Check
+    initial: off
+  tempsensor_check:
+    name: Temp Check
+    initial: off     
+  house_occupied:
+    name: House Occupied
+    initial: on
+  guest_mode:
+    name: Guest Mode
+    initial: off
+    icon: mdi:lock
+  no_notifications:
+    name: Disable Notifications
+    initial: off
+    icon: mdi:cellphone-wireless
+  silent_notifications:
+    name: Silent Notifications
+    initial: off
+    icon: mdi:vibrate
 
+customize:
+input_boolean.node_red:
+  hidden: true
+input_boolean.YOURSECRETDISARMBOOLEAN:
+  hidden: true
+input_boolean.house_check:
+  hidden: true
+input_boolean.fam_leaving:
+  hidden: true
+input_boolean.alarm_check:
+  hidden: true
+input_boolean.camera_check:
+  hidden: true
+input_boolean.tempsensor_check:
+  hidden: true  
+input_boolean.house_occupied:
+  hidden: true
+  
+alarm:
+ - platform: manual
+   name: Home Alarm
+   code: !secret alarm_code
+   trigger_time: 300
+   disarmed:
+     trigger_time: 0
+   armed_home:
+     pending_time: 0
+     delay_time: 0
+   armed_away:
+     pending_time: 48
+     delay_time: 30
+   triggered:
+     pending_time: 0
+     
+automation:
+- id: disable_alarm_actionable_notification
+  alias: Disable Alarm
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: DISABLEALARM
+  action:
+    service: alarm_control_panel.alarm_disarm
+    entity_id: alarm_control_panel.home_alarm
+    data:
+      code: !secret alarm_code
+- id: enable_alarm_away_actionable_notification
+  alias: Set Alarm Away
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: ARMAWAY
+  action:
+    service: alarm_control_panel.alarm_arm_away
+    entity_id: alarm_control_panel.home_alarm
+    data:
+      code: !secret alarm_code
+- id: node_red_watchdog
+  alias: Node Red Watchdog
+  initial_state: true
+  trigger:
+  - entity_id: sensor.node_red
+    platform: state
+    from: OK
+    to: unknown
+  condition: []
+  action:
+  - data:
+      addon: a0d7b954_nodered
+    service: hassio.addon_restart
+  - data:
+      message: Node Red was Restarted!
+    service: notify.ios_jakes_iphone
+    
+ios:
+  push:
+    categories:
+      - name: alarm
+        identifier: 'alarm'
+        actions:
+         - identifier: 'SIREN'
+           title: 'Activate Siren!!!'
+           activationMode: 'background'
+           authenticationRequired: no
+           destructive: yes
+           behavior: 'default' 
+         - identifier: 'DISABLEALARM'
+           title: 'Oops...Disable Alarm'
+           activationMode: 'background'
+           authenticationRequired: no
+           destructive: yes
+           behavior: 'default'  
+      - name: armaway
+        identifier: 'armaway'
+        actions:
+         - identifier: 'ARMAWAY'
+           title: 'Set Alarm Away Mode'
+           activationMode: 'background'
+           authenticationRequired: no
+           destructive: yes
+           behavior: 'default'    
+      - name: alarm
+        identifier: 'disablealarm'
+        actions:
+         - identifier: 'DISABLEALARM'
+           title: 'Disable Alarm'
+           activationMode: 'background'
+           authenticationRequired: no
+           destructive: yes
+           behavior: 'default'
+           
+           
