@@ -1,3 +1,13 @@
+ - platform: mjpeg
+   mjpeg_url: http://BLURIRISADDRESS:PORT/mjpg/YOURCAMERA'SHORTNAME'
+   name: Porch
+   username: !secret blue_iris_user
+   password: !secret blue_iris_password
+   authentication: basic
+   framerate: 15
+   
+## REPEAT FOR EACH CAMERA OF COURSE....
+
 input_boolean:
   panic:
     name: Panic!
