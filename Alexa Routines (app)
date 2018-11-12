@@ -1,6 +1,6 @@
 Alexa, check the house ---- turn on input_boolean.house_check
-Alexa, turn on guest mode
-Alexa, The kids are staying home ----turn on Guest Mode
+Alexa, turn on guest mode ---- turn on input_boolean.guest_mode
+Alexa, The kids are staying home ---- turn on Guest Mode
 Alexa, We are leaving ---- turn on input_boolean.fam_leaving
 Alexa (your secret passphrase i.e. Alexa, the eagle has landed) ---- turn on input_boolean.(yoursecretboolean)
 Alexa, the sky is falling ---- turn on input_boolean.panic
