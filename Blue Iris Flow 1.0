@@ -1,0 +1,749 @@
+[
+    {
+        "id": "38bfe0e9.a456b",
+        "type": "tab",
+        "label": "Blue Iris",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "bc011edd.4575d",
+        "type": "mqtt in",
+        "z": "38bfe0e9.a456b",
+        "name": "",
+        "topic": "Blueiris-Driveway",
+        "qos": "1",
+        "broker": "3a69e582.e2abba",
+        "x": 95,
+        "y": 330,
+        "wires": [
+            [
+                "1a0ad84a.2d2838",
+                "5a376ce6.703394"
+            ]
+        ]
+    },
+    {
+        "id": "e824e552.f9fe18",
+        "type": "api-call-service",
+        "z": "38bfe0e9.a456b",
+        "name": "Porch On",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_on",
+        "data": "{   \"entity_id\": \"switch.porch_light\" }",
+        "mergecontext": "",
+        "x": 525,
+        "y": 180,
+        "wires": [
+            [
+                "11c70b47.bba4b5"
+            ]
+        ]
+    },
+    {
+        "id": "48588a25.dbd634",
+        "type": "mqtt in",
+        "z": "38bfe0e9.a456b",
+        "name": "",
+        "topic": "Blueiris-Frontyard",
+        "qos": "1",
+        "broker": "3a69e582.e2abba",
+        "x": 105,
+        "y": 450,
+        "wires": [
+            [
+                "9b8dd401.46b4b8",
+                "8bb40226.38975"
+            ]
+        ]
+    },
+    {
+        "id": "9cd9ccb.aacbe3",
+        "type": "mqtt in",
+        "z": "38bfe0e9.a456b",
+        "name": "",
+        "topic": "Blueiris-Sideyard",
+        "qos": "1",
+        "broker": "3a69e582.e2abba",
+        "x": 95,
+        "y": 390,
+        "wires": [
+            [
+                "91824d5f.3a4ab",
+                "288cfbe6.49bd24"
+            ]
+        ]
+    },
+    {
+        "id": "75f51a72.25d504",
+        "type": "mqtt in",
+        "z": "38bfe0e9.a456b",
+        "name": "",
+        "topic": "Blueiris-Backyard",
+        "qos": "1",
+        "broker": "3a69e582.e2abba",
+        "x": 95,
+        "y": 270,
+        "wires": [
+            [
+                "494fc710.c67358",
+                "3dece424.ea099c",
+                "db592bd8.5c2d88"
+            ]
+        ]
+    },
+    {
+        "id": "12ddfa92.54a0a5",
+        "type": "mqtt in",
+        "z": "38bfe0e9.a456b",
+        "name": "",
+        "topic": "Blueiris-Porch",
+        "qos": "1",
+        "broker": "3a69e582.e2abba",
+        "x": 85,
+        "y": 510,
+        "wires": [
+            [
+                "c87f7655.dcaac8",
+                "52dc500b.73c78"
+            ]
+        ]
+    },
+    {
+        "id": "494fc710.c67358",
+        "type": "time-range-switch",
+        "z": "38bfe0e9.a456b",
+        "name": "",
+        "lat": "35.225286",
+        "lon": "-89.837599",
+        "startTime": "20:00",
+        "endTime": "05:00",
+        "startOffset": "",
+        "endOffset": 0,
+        "x": 325,
+        "y": 210,
+        "wires": [
+            [
+                "e824e552.f9fe18",
+                "8b298a44.bb2e48"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8b298a44.bb2e48",
+        "type": "api-call-service",
+        "z": "38bfe0e9.a456b",
+        "name": "Floods On",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_on",
+        "data": "{   \"entity_id\": \"switch.flood_lights\" }",
+        "mergecontext": "",
+        "x": 535,
+        "y": 210,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "11c70b47.bba4b5",
+        "type": "delay",
+        "z": "38bfe0e9.a456b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "f158417f.69c84",
+                "a78ed375.b486e"
+            ]
+        ]
+    },
+    {
+        "id": "f158417f.69c84",
+        "type": "api-call-service",
+        "z": "38bfe0e9.a456b",
+        "name": "Porch Off",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_off",
+        "data": "{   \"entity_id\": \"switch.porch_light\" }",
+        "mergecontext": "",
+        "x": 855,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a78ed375.b486e",
+        "type": "api-call-service",
+        "z": "38bfe0e9.a456b",
+        "name": "Floods Off",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_off",
+        "data": "{   \"entity_id\": \"switch.flood_lights\" }",
+        "mergecontext": "",
+        "x": 865,
+        "y": 210,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "71ff3a6e.bfe5d4",
+        "type": "function",
+        "z": "38bfe0e9.a456b",
+        "name": "Porch Silent",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Porch Motion',\n    \"data\": \n    {\n      \"attachment\": \n      {\n        \"url\": \"http://4meuwil.duckdns.org/api/camera_proxy/camera.porch?api_password=wgM91011ah3AK\",\n        \"content-type\": \"jpeg\",\n        \"hide_thumbnail\": \"false\"\n      },\n      \"push\": \n      {\n        \"badge\": 0,\n        \"sound\": \"silent.wav\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 475,
+        "y": 525,
+        "wires": [
+            [
+                "2ebf7c4a.bfac14"
+            ]
+        ]
+    },
+    {
+        "id": "12be89da.064a66",
+        "type": "api-call-service",
+        "z": "38bfe0e9.a456b",
+        "name": "Jake",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_jakes_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 920,
+        "y": 375,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b8117c55.5acdd",
+        "type": "function",
+        "z": "38bfe0e9.a456b",
+        "name": "Frontyard Silent",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Frontyard Motion',\n    \"data\": \n    {\n      \"attachment\": \n      {\n        \"url\": \"http://4meuwil.duckdns.org/api/camera_proxy/camera.frontyard?api_password=wgM91011ah3AK\",\n        \"content-type\": \"jpeg\",\n        \"hide_thumbnail\": \"false\"\n      },\n      \"push\": \n      {\n        \"badge\": 0,\n        \"sound\": \"silent.wav\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 485,
+        "y": 465,
+        "wires": [
+            [
+                "2ebf7c4a.bfac14"
+            ]
+        ]
+    },
+    {
+        "id": "bbdc60e9.f5046",
+        "type": "function",
+        "z": "38bfe0e9.a456b",
+        "name": "Sideyard Silent",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Sideyard Motion',\n    \"data\": \n    {\n      \"attachment\": \n      {\n        \"url\": \"http://4meuwil.duckdns.org/api/camera_proxy/camera.sideyard?api_password=wgM91011ah3AK\",\n        \"content-type\": \"jpeg\",\n        \"hide_thumbnail\": \"false\"\n      },\n      \"push\": \n      {\n        \"badge\": 0,\n        \"sound\": \"silent.wav\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 485,
+        "y": 405,
+        "wires": [
+            [
+                "2ebf7c4a.bfac14"
+            ]
+        ]
+    },
+    {
+        "id": "f29ac018.0748b",
+        "type": "function",
+        "z": "38bfe0e9.a456b",
+        "name": "Driveway Silent",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Driveway Motion',\n    \"data\": \n    {\n      \"attachment\": \n      {\n        \"url\": \"http://4meuwil.duckdns.org/api/camera_proxy/camera.driveway?api_password=wgM91011ah3AK\",\n        \"content-type\": \"jpeg\",\n        \"hide_thumbnail\": \"false\"\n      },\n      \"push\": \n      {\n        \"badge\": 0,\n        \"sound\": \"silent.wav\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 485,
+        "y": 345,
+        "wires": [
+            [
+                "2ebf7c4a.bfac14"
+            ]
+        ]
+    },
+    {
+        "id": "d26cd140.ebb9d",
+        "type": "function",
+        "z": "38bfe0e9.a456b",
+        "name": "Backyard Silent",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Backyard Motion',\n    \"data\": \n    {\n      \"attachment\": \n      {\n        \"url\": \"http://4meuwil.duckdns.org/api/camera_proxy/camera.backyard?api_password=wgM91011ah3AK\",\n        \"content-type\": \"jpeg\",\n        \"hide_thumbnail\": \"false\"\n      },\n      \"push\": \n      {\n        \"badge\": 0,\n        \"sound\": \"silent.wav\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 485,
+        "y": 285,
+        "wires": [
+            [
+                "2ebf7c4a.bfac14"
+            ]
+        ]
+    },
+    {
+        "id": "2ebf7c4a.bfac14",
+        "type": "api-current-state",
+        "z": "38bfe0e9.a456b",
+        "name": "Notifications?",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "on",
+        "override_topic": false,
+        "override_payload": false,
+        "override_data": false,
+        "entity_id": "input_boolean.no_notifications",
+        "x": 755,
+        "y": 375,
+        "wires": [
+            [
+                "12be89da.064a66",
+                "8606ed5e.86bf2"
+            ]
+        ]
+    },
+    {
+        "id": "e642260.1cb31d8",
+        "type": "function",
+        "z": "38bfe0e9.a456b",
+        "name": "Backyard Loud",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Backyard Motion',\n    \"data\": \n    {\n      \"attachment\": \n      {\n        \"url\": \"http://4meuwil.duckdns.org/api/camera_proxy/camera.backyard?api_password=wgM91011ah3AK\",\n        \"content-type\": \"jpeg\",\n        \"hide_thumbnail\": \"false\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 485,
+        "y": 255,
+        "wires": [
+            [
+                "2ebf7c4a.bfac14"
+            ]
+        ]
+    },
+    {
+        "id": "3dece424.ea099c",
+        "type": "api-current-state",
+        "z": "38bfe0e9.a456b",
+        "name": "Loud",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "on",
+        "override_topic": false,
+        "override_payload": false,
+        "override_data": false,
+        "entity_id": "input_boolean.silent_notifications",
+        "x": 305,
+        "y": 255,
+        "wires": [
+            [
+                "e642260.1cb31d8"
+            ]
+        ]
+    },
+    {
+        "id": "db592bd8.5c2d88",
+        "type": "api-current-state",
+        "z": "38bfe0e9.a456b",
+        "name": "Silent",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": false,
+        "override_payload": false,
+        "override_data": false,
+        "entity_id": "input_boolean.silent_notifications",
+        "x": 305,
+        "y": 285,
+        "wires": [
+            [
+                "d26cd140.ebb9d"
+            ]
+        ]
+    },
+    {
+        "id": "1a0ad84a.2d2838",
+        "type": "api-current-state",
+        "z": "38bfe0e9.a456b",
+        "name": "Loud",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "on",
+        "override_topic": false,
+        "override_payload": false,
+        "override_data": false,
+        "entity_id": "input_boolean.silent_notifications",
+        "x": 305,
+        "y": 315,
+        "wires": [
+            [
+                "78d6219e.f5aca"
+            ]
+        ]
+    },
+    {
+        "id": "5a376ce6.703394",
+        "type": "api-current-state",
+        "z": "38bfe0e9.a456b",
+        "name": "Silent",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": false,
+        "override_payload": false,
+        "override_data": false,
+        "entity_id": "input_boolean.silent_notifications",
+        "x": 305,
+        "y": 345,
+        "wires": [
+            [
+                "f29ac018.0748b"
+            ]
+        ]
+    },
+    {
+        "id": "91824d5f.3a4ab",
+        "type": "api-current-state",
+        "z": "38bfe0e9.a456b",
+        "name": "Loud",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "on",
+        "override_topic": false,
+        "override_payload": false,
+        "override_data": false,
+        "entity_id": "input_boolean.silent_notifications",
+        "x": 305,
+        "y": 375,
+        "wires": [
+            [
+                "eaa05104.67eb1"
+            ]
+        ]
+    },
+    {
+        "id": "288cfbe6.49bd24",
+        "type": "api-current-state",
+        "z": "38bfe0e9.a456b",
+        "name": "Silent",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": false,
+        "override_payload": false,
+        "override_data": false,
+        "entity_id": "input_boolean.silent_notifications",
+        "x": 305,
+        "y": 405,
+        "wires": [
+            [
+                "bbdc60e9.f5046"
+            ]
+        ]
+    },
+    {
+        "id": "9b8dd401.46b4b8",
+        "type": "api-current-state",
+        "z": "38bfe0e9.a456b",
+        "name": "Loud",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "on",
+        "override_topic": false,
+        "override_payload": false,
+        "override_data": false,
+        "entity_id": "input_boolean.silent_notifications",
+        "x": 305,
+        "y": 435,
+        "wires": [
+            [
+                "a75cfbe9.27abf8"
+            ]
+        ]
+    },
+    {
+        "id": "8bb40226.38975",
+        "type": "api-current-state",
+        "z": "38bfe0e9.a456b",
+        "name": "Silent",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": false,
+        "override_payload": false,
+        "override_data": false,
+        "entity_id": "input_boolean.silent_notifications",
+        "x": 305,
+        "y": 465,
+        "wires": [
+            [
+                "b8117c55.5acdd"
+            ]
+        ]
+    },
+    {
+        "id": "c87f7655.dcaac8",
+        "type": "api-current-state",
+        "z": "38bfe0e9.a456b",
+        "name": "Loud",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "on",
+        "override_topic": false,
+        "override_payload": false,
+        "override_data": false,
+        "entity_id": "input_boolean.silent_notifications",
+        "x": 305,
+        "y": 495,
+        "wires": [
+            [
+                "de683d60.4efa2"
+            ]
+        ]
+    },
+    {
+        "id": "52dc500b.73c78",
+        "type": "api-current-state",
+        "z": "38bfe0e9.a456b",
+        "name": "Silent",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": false,
+        "override_payload": false,
+        "override_data": false,
+        "entity_id": "input_boolean.silent_notifications",
+        "x": 305,
+        "y": 525,
+        "wires": [
+            [
+                "71ff3a6e.bfe5d4"
+            ]
+        ]
+    },
+    {
+        "id": "78d6219e.f5aca",
+        "type": "function",
+        "z": "38bfe0e9.a456b",
+        "name": "Driveway Loud",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Driveway Motion',\n    \"data\": \n    {\n      \"attachment\": \n      {\n        \"url\": \"http://4meuwil.duckdns.org/api/camera_proxy/camera.driveway?api_password=wgM91011ah3AK\",\n        \"content-type\": \"jpeg\",\n        \"hide_thumbnail\": \"false\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 485,
+        "y": 315,
+        "wires": [
+            [
+                "2ebf7c4a.bfac14"
+            ]
+        ]
+    },
+    {
+        "id": "eaa05104.67eb1",
+        "type": "function",
+        "z": "38bfe0e9.a456b",
+        "name": "Sideyard Loud",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Sideyard Motion',\n    \"data\": \n    {\n      \"attachment\": \n      {\n        \"url\": \"http://4meuwil.duckdns.org/api/camera_proxy/camera.sideyard?api_password=wgM91011ah3AK\",\n        \"content-type\": \"jpeg\",\n        \"hide_thumbnail\": \"false\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 485,
+        "y": 375,
+        "wires": [
+            [
+                "2ebf7c4a.bfac14"
+            ]
+        ]
+    },
+    {
+        "id": "a75cfbe9.27abf8",
+        "type": "function",
+        "z": "38bfe0e9.a456b",
+        "name": "Frontyard Loud",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Frontyard Motion',\n    \"data\": \n    {\n      \"attachment\": \n      {\n        \"url\": \"http://4meuwil.duckdns.org/api/camera_proxy/camera.frontyard?api_password=wgM91011ah3AK\",\n        \"content-type\": \"jpeg\",\n        \"hide_thumbnail\": \"false\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 485,
+        "y": 435,
+        "wires": [
+            [
+                "2ebf7c4a.bfac14"
+            ]
+        ]
+    },
+    {
+        "id": "de683d60.4efa2",
+        "type": "function",
+        "z": "38bfe0e9.a456b",
+        "name": "Porch Loud",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Porch Motion',\n    \"data\": \n    {\n      \"attachment\": \n      {\n        \"url\": \"http://4meuwil.duckdns.org/api/camera_proxy/camera.porch?api_password=wgM91011ah3AK\",\n        \"content-type\": \"jpeg\",\n        \"hide_thumbnail\": \"false\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 475,
+        "y": 495,
+        "wires": [
+            [
+                "2ebf7c4a.bfac14"
+            ]
+        ]
+    },
+    {
+        "id": "ddfb138d.00972",
+        "type": "inject",
+        "z": "38bfe0e9.a456b",
+        "name": "silence",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "00 08 * * 1,2,3,4,5",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 105,
+        "y": 75,
+        "wires": [
+            [
+                "1418660f.9445aa"
+            ]
+        ]
+    },
+    {
+        "id": "a9f5d950.15bc48",
+        "type": "inject",
+        "z": "38bfe0e9.a456b",
+        "name": "notifiy",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "00 17 * * 1,2,3,4,5",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 105,
+        "y": 105,
+        "wires": [
+            [
+                "8f68134f.11c1a"
+            ]
+        ]
+    },
+    {
+        "id": "1418660f.9445aa",
+        "type": "api-call-service",
+        "z": "38bfe0e9.a456b",
+        "name": "On",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "data": "{  \"entity_id\": \"input_boolean.silent_notifications\"   }",
+        "mergecontext": "",
+        "x": 260,
+        "y": 75,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8f68134f.11c1a",
+        "type": "api-call-service",
+        "z": "38bfe0e9.a456b",
+        "name": "Off",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_off",
+        "data": "{  \"entity_id\": \"input_boolean.silent_notifications\"   }",
+        "mergecontext": "",
+        "x": 260,
+        "y": 105,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8f9b8453.42ba78",
+        "type": "comment",
+        "z": "38bfe0e9.a456b",
+        "name": "Silent Notifications M-F 0800-1630",
+        "info": "",
+        "x": 155,
+        "y": 30,
+        "wires": []
+    },
+    {
+        "id": "f818e602.d20bf8",
+        "type": "comment",
+        "z": "38bfe0e9.a456b",
+        "name": "No Notifications (House Mode)",
+        "info": "",
+        "x": 805,
+        "y": 330,
+        "wires": []
+    },
+    {
+        "id": "8606ed5e.86bf2",
+        "type": "api-call-service",
+        "z": "38bfe0e9.a456b",
+        "name": "Mandy",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_mandys_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 920,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fa95baf0.1b0708",
+        "type": "comment",
+        "z": "38bfe0e9.a456b",
+        "name": "Blue Iris MQTT Triggers",
+        "info": "",
+        "x": 115,
+        "y": 210,
+        "wires": []
+    },
+    {
+        "id": "d22a7ebf.ff8c3",
+        "type": "comment",
+        "z": "38bfe0e9.a456b",
+        "name": "Motion Light Activation",
+        "info": "",
+        "x": 685,
+        "y": 135,
+        "wires": []
+    },
+    {
+        "id": "3a69e582.e2abba",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "MQTT",
+        "broker": "YOURBROKERIP",
+        "port": "YOURBROKERPORT",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "43c6abca.ce6fb4",
+        "type": "server",
+        "z": "",
+        "name": "Home Assistant",
+        "legacy": false
+    }
+]
