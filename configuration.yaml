@@ -1,3 +1,10 @@
+device_tracker:
+  - platform: linksys_smart
+    host: !secret linksys
+    interval_seconds: 15
+    consider_home: 180
+    track_new_devices: false
+
 camera:
 - platform: mjpeg
    mjpeg_url: http://BLURIRISADDRESS:PORT/mjpg/YOURCAMERA'SHORTNAME'
@@ -164,4 +171,26 @@ ios:
            destructive: yes
            behavior: 'default'
            
-           
+ zones:
+   - name: Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: 150
+    icon: mdi:castle
+
+  - name: !secret abbyschool
+    latitude: !secret abbyschool_latitude
+    longitude: !secret abbyschool_longitude
+    radius: 250
+    icon: mdi:school
+    
+  - name: Work
+    latitude: !secret mandywork_latitude
+    longitude: !secret mandywork_longitude
+    radius: 250
+    icon: mdi:office-building
+    
+  - name: Work
+    latitude: !secret jakework_latitude
+    longitude: !secret jakework_longitude
+    radius: 250
