@@ -1,0 +1,140 @@
+homeassistant:
+  customize:
+    cover.garage_door:
+      device_class: garage
+      friendly_name: Garage Door
+    switch.garage_light1:
+      friendly_name: Garage Light
+      icon: mdi:wrench
+    switch.garage_light2:
+      friendly_name: Work Light
+      icon: mdi:wrench
+    switch.testswitch:
+      hidden: true
+
+automation:
+- id: garage_door_light_trigger_actionable_notification
+  alias: Garage Door Light Trigger
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: NIGHT_LIGHTS
+  action:
+    service: switch.turn_on
+    entity_id: switch.kitchen_island
+- id: garage_door_pulse
+  alias: Garage Door Pulse
+  initial_state: 'on'
+  trigger:
+  - payload: 'ON'
+    platform: mqtt
+    topic: cmnd/garage_door/POWER
+  condition: []
+  action:
+  - delay: 00:00:01
+  - data:
+      payload: 'OFF'
+      topic: cmnd/garage_door/POWER
+    service: mqtt.publish
+- id: close_garage_door_actionable_notification
+  alias: Close Garage Door
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: CLOSE_GARAGE
+  action:
+    service: cover.close_cover
+    entity_id: cover.garage_door
+- id: disable_garage_auto_actionable_notification
+  alias: Disable Garage Auto
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: DISABLE_GARAGE
+  action:
+    service: input_boolean.turn_off
+    entity_id: input_boolean.garage_automation
+
+binary_sensor:
+  - platform: mqtt
+    name: "Garage Door"
+    device_class: garage_door
+    state_topic: "cmnd/2/POWER2"
+    state_open: "ON"
+    state_closed: "OFF"
+    optomistic: false   
+    
+cover:
+## http://192.168.1.254
+  - platform: mqtt
+    name: "garage_door"
+    command_topic: "cmnd/garage_door/POWER"
+    state_topic: "cmnd/2/POWER2"
+    availability_topic: "tele/livingroom_light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_open: "ON"
+    payload_close: "ON"
+    payload_stop: "ON"
+    state_open: "ON"
+    state_closed: "OFF"
+    optomistic: false
+    retain: false
+    
+group:
+  garage:
+    name: Garage
+    icon: mdi:wrench
+    control: hidden
+    entities:
+     - switch.garage_light1
+     - switch.garage_light2
+
+input_boolean:
+  garage_automation:
+    name: Garage Auto
+    initial: on
+    icon: mdi:garage 
+    
+ios:
+  push:
+    categories:
+      - name: garage
+        identifier: 'garage'
+        actions:
+         - identifier: 'CLOSE_GARAGE'
+           title: 'Close Garage Door'
+           activationMode: 'background'
+           authenticationRequired: no
+           destructive: yes
+           behavior: 'default'
+         - identifier: 'DISABLE_GARAGE'
+           title: 'Disable Garage Auto'
+           activationMode: 'background'
+           authenticationRequired: no
+           destructive: yes
+           behavior: 'default'
+      - name: nightlights
+        identifier: 'nightlights'
+        actions:
+         - identifier: 'NIGHT_LIGHTS'
+           title: 'Turn on Lights'
+           activationMode: 'background'
+           authenticationRequired: no
+           destructive: yes
+           behavior: 'default'    
+switch:
+  - platform: template
+    switches:
+     testswitch:
+        value_template: "{{ is_state('input_boolean.testswitch', 'on') }}"
+        turn_on:
+          service: input_boolean.turn_on
+          entity_id: input_boolean.testswitch
+        turn_off:
+          service: input_boolean.turn_off
+          entity_id: input_boolean.testswitch
+     
