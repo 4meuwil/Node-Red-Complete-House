@@ -14,6 +14,7 @@ homeassistant:
     backyard: !include backyard.yaml
     blueiris: !include blueiris.yaml
     climate: !include climate.yaml
+    garage: !include garage.yaml
     housemodes: !include housemodes.yaml
     presence: !include presence.yaml
     security: !include security.yaml
