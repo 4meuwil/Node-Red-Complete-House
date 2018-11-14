@@ -1,4 +1,4 @@
-*** updated using packages and merged alarm and house check flows into "security"
+*** updated using packages and merged alarm and house check flows into "security", hibernate flow now "presence"
 
 # Node-Red-Complete-House
 
