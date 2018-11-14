@@ -1,4 +1,4 @@
-currently updating to packages style file system...and updated flows....please standby
+*** updated using packages and merged alarm and house check flows into "security"
 
 # Node-Red-Complete-House
 
