@@ -1,0 +1,759 @@
+[
+    {
+        "id": "b2e345b7.0f3fa8",
+        "type": "tab",
+        "label": "Night",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "daf90931.3c3438",
+        "type": "time-range-switch",
+        "z": "b2e345b7.0f3fa8",
+        "name": "",
+        "lat": "35.225286",
+        "lon": "-89.837599",
+        "startTime": "sunset",
+        "endTime": "sunrise",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 305,
+        "y": 240,
+        "wires": [
+            [
+                "d97b72d5.6222a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "bec3e899.444868",
+        "type": "time-range-switch",
+        "z": "b2e345b7.0f3fa8",
+        "name": "",
+        "lat": "35.225286",
+        "lon": "-89.837599",
+        "startTime": "sunrise",
+        "endTime": "sunset",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 275,
+        "y": 75,
+        "wires": [
+            [
+                "8b1dec7b.aa7f6"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "cdd99833.6b7718",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Porch Off",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_off",
+        "data": "{   \"entity_id\": \"switch.porch_light\" }",
+        "mergecontext": "",
+        "x": 600,
+        "y": 75,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "75ee6138.59033",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Pegola Off",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_off",
+        "data": "{   \"entity_id\": \"switch.pergola_lights\" }",
+        "mergecontext": "",
+        "x": 610,
+        "y": 105,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f0645f7.452718",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Floods Off",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_off",
+        "data": "{   \"entity_id\": \"switch.flood_lights\" }",
+        "mergecontext": "",
+        "x": 610,
+        "y": 135,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d97b72d5.6222a",
+        "type": "delay",
+        "z": "b2e345b7.0f3fa8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 490,
+        "y": 240,
+        "wires": [
+            [
+                "acbf2af9.f71a08"
+            ]
+        ]
+    },
+    {
+        "id": "8b1dec7b.aa7f6",
+        "type": "delay",
+        "z": "b2e345b7.0f3fa8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 450,
+        "y": 75,
+        "wires": [
+            [
+                "cdd99833.6b7718",
+                "75ee6138.59033",
+                "9f0645f7.452718"
+            ]
+        ]
+    },
+    {
+        "id": "4279d8c2.6221b8",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Porch",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "switch.porch_light",
+        "entityidfiltertype": "substring",
+        "haltifstate": "off",
+        "x": 80,
+        "y": 240,
+        "wires": [
+            [
+                "daf90931.3c3438"
+            ]
+        ]
+    },
+    {
+        "id": "b13bb6fd.88e3e8",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Floods",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "switch.flood_lights",
+        "entityidfiltertype": "substring",
+        "haltifstate": "off",
+        "x": 80,
+        "y": 270,
+        "wires": [
+            [
+                "daf90931.3c3438"
+            ]
+        ]
+    },
+    {
+        "id": "b3acbc88.82aeb",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Pergola Lights",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "switch.pergola_lights",
+        "entityidfiltertype": "substring",
+        "haltifstate": "off",
+        "x": 100,
+        "y": 300,
+        "wires": [
+            [
+                "daf90931.3c3438"
+            ]
+        ]
+    },
+    {
+        "id": "ecd501f7.5aed3",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Pergola Fan",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "switch.pergola_fan",
+        "entityidfiltertype": "substring",
+        "haltifstate": "off",
+        "x": 100,
+        "y": 330,
+        "wires": [
+            [
+                "d97b72d5.6222a"
+            ]
+        ]
+    },
+    {
+        "id": "7ed5bca.5accd44",
+        "type": "function",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Data",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Are You Hanging Out In The Backyard?',\n    \"data\": \n    {\n      \"push\": \n      {\n        \"badge\": 0,\n        \"category\": \"backyard\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 800,
+        "y": 285,
+        "wires": [
+            [
+                "402fbf92.ee1d6",
+                "6a87f512.f65bfc"
+            ]
+        ]
+    },
+    {
+        "id": "402fbf92.ee1d6",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Jake",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_jakes_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 935,
+        "y": 285,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f1ceeb77.b20438",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Porch",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "switch.porch_light",
+        "entityidfiltertype": "substring",
+        "haltifstate": "off",
+        "x": 80,
+        "y": 75,
+        "wires": [
+            [
+                "bec3e899.444868"
+            ]
+        ]
+    },
+    {
+        "id": "e7b63d9e.cf038",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Floods",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "switch.flood_lights",
+        "entityidfiltertype": "substring",
+        "haltifstate": "off",
+        "x": 80,
+        "y": 105,
+        "wires": [
+            [
+                "bec3e899.444868"
+            ]
+        ]
+    },
+    {
+        "id": "9596234.f4bece",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Pergola Lights",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "switch.pergola_lights",
+        "entityidfiltertype": "substring",
+        "haltifstate": "off",
+        "x": 100,
+        "y": 135,
+        "wires": [
+            [
+                "bec3e899.444868"
+            ]
+        ]
+    },
+    {
+        "id": "28bff410.78379c",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Backyard Auto",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "input_boolean.backyard_automation",
+        "entityidfiltertype": "substring",
+        "haltifstate": "on",
+        "x": 110,
+        "y": 570,
+        "wires": [
+            [
+                "2a6a120a.d4b48e"
+            ]
+        ]
+    },
+    {
+        "id": "2a6a120a.d4b48e",
+        "type": "delay",
+        "z": "b2e345b7.0f3fa8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "hours",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 285,
+        "y": 570,
+        "wires": [
+            [
+                "796da0e.279736"
+            ]
+        ]
+    },
+    {
+        "id": "796da0e.279736",
+        "type": "api-current-state",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Yard Auto",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": true,
+        "override_payload": true,
+        "entity_id": "input_boolean.backyard_automation",
+        "x": 435,
+        "y": 570,
+        "wires": [
+            [
+                "911a5eeb.fdfce"
+            ]
+        ]
+    },
+    {
+        "id": "911a5eeb.fdfce",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Turn Auto On",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "data": "{   \"entity_id\": \"input_boolean.backyard_automation\" }",
+        "mergecontext": "",
+        "x": 605,
+        "y": 570,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9beb8b59.c4cce8",
+        "type": "inject",
+        "z": "b2e345b7.0f3fa8",
+        "name": "4am",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "00 04 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 80,
+        "y": 675,
+        "wires": [
+            [
+                "f756a1a3.c513e",
+                "58764de7.196b74",
+                "fa6c2b27.035ab8",
+                "c8f3c790.6b90a8"
+            ]
+        ]
+    },
+    {
+        "id": "f756a1a3.c513e",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Porch Off",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_off",
+        "data": "{   \"entity_id\": \"switch.porch_light\" }",
+        "mergecontext": "",
+        "x": 285,
+        "y": 675,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "58764de7.196b74",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Pegola Off",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_off",
+        "data": "{   \"entity_id\": \"switch.pergola_lights\" }",
+        "mergecontext": "",
+        "x": 295,
+        "y": 705,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fa6c2b27.035ab8",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Floods Off",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_off",
+        "data": "{   \"entity_id\": \"switch.flood_lights\" }",
+        "mergecontext": "",
+        "x": 295,
+        "y": 735,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c8f3c790.6b90a8",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Pegola Fan Off",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_off",
+        "data": "{   \"entity_id\": \"switch.pergola_fan\" }",
+        "mergecontext": "",
+        "x": 305,
+        "y": 765,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "57f142c2.fefd8c",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Curio On",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_on",
+        "data": "{   \"entity_id\": \"switch.livingroom_curio\" }",
+        "mergecontext": "",
+        "x": 285,
+        "y": 855,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8d60429c.a7a1",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Curio Off",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_off",
+        "data": "{   \"entity_id\": \"switch.livingroom_curio\" }",
+        "mergecontext": "",
+        "x": 285,
+        "y": 885,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ecce38d.1d2b6c",
+        "type": "inject",
+        "z": "b2e345b7.0f3fa8",
+        "name": "6pm",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "00 18 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 80,
+        "y": 855,
+        "wires": [
+            [
+                "57f142c2.fefd8c"
+            ]
+        ]
+    },
+    {
+        "id": "9226073a.415ec8",
+        "type": "inject",
+        "z": "b2e345b7.0f3fa8",
+        "name": "6am",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "00 06 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 80,
+        "y": 885,
+        "wires": [
+            [
+                "8d60429c.a7a1"
+            ]
+        ]
+    },
+    {
+        "id": "972d29d4.a00088",
+        "type": "change",
+        "z": "b2e345b7.0f3fa8",
+        "name": "off reset",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 285,
+        "y": 390,
+        "wires": [
+            [
+                "d97b72d5.6222a",
+                "3a627ea0.e88032"
+            ]
+        ]
+    },
+    {
+        "id": "cf6843b5.b1854",
+        "type": "comment",
+        "z": "b2e345b7.0f3fa8",
+        "name": "No Backyard Lights During The Day Silly!",
+        "info": "",
+        "x": 190,
+        "y": 30,
+        "wires": []
+    },
+    {
+        "id": "38c616ae.410e5a",
+        "type": "comment",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Monitor Backyard",
+        "info": "",
+        "x": 110,
+        "y": 195,
+        "wires": []
+    },
+    {
+        "id": "c0449241.92b69",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Porch",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "switch.porch_light",
+        "entityidfiltertype": "substring",
+        "haltifstate": "on",
+        "x": 80,
+        "y": 390,
+        "wires": [
+            [
+                "972d29d4.a00088"
+            ]
+        ]
+    },
+    {
+        "id": "557b3986.df0b48",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Floods",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "switch.flood_lights",
+        "entityidfiltertype": "substring",
+        "haltifstate": "on",
+        "x": 80,
+        "y": 420,
+        "wires": [
+            [
+                "972d29d4.a00088"
+            ]
+        ]
+    },
+    {
+        "id": "5263337e.3a60cc",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Pergola Lights",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "switch.pergola_lights",
+        "entityidfiltertype": "substring",
+        "haltifstate": "on",
+        "x": 100,
+        "y": 450,
+        "wires": [
+            [
+                "972d29d4.a00088"
+            ]
+        ]
+    },
+    {
+        "id": "bd25457a.8539f8",
+        "type": "server-state-changed",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Pergola Fan",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "switch.pergola_fan",
+        "entityidfiltertype": "substring",
+        "haltifstate": "on",
+        "x": 100,
+        "y": 480,
+        "wires": [
+            [
+                "972d29d4.a00088"
+            ]
+        ]
+    },
+    {
+        "id": "37bb3b28.c9ce24",
+        "type": "comment",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Backyard Auto Mode Reset",
+        "info": "",
+        "x": 140,
+        "y": 525,
+        "wires": []
+    },
+    {
+        "id": "47b840b2.42d6c",
+        "type": "comment",
+        "z": "b2e345b7.0f3fa8",
+        "name": "4am Reset",
+        "info": "",
+        "x": 90,
+        "y": 630,
+        "wires": []
+    },
+    {
+        "id": "2fdaedfe.1d13a2",
+        "type": "comment",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Curio Schedule",
+        "info": "",
+        "x": 110,
+        "y": 810,
+        "wires": []
+    },
+    {
+        "id": "acbf2af9.f71a08",
+        "type": "api-current-state",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Yard Auto",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": true,
+        "override_payload": true,
+        "entity_id": "input_boolean.backyard_automation",
+        "x": 660,
+        "y": 240,
+        "wires": [
+            [
+                "fc73b70e.274918"
+            ]
+        ]
+    },
+    {
+        "id": "fc73b70e.274918",
+        "type": "api-current-state",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Backyard",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": true,
+        "override_payload": true,
+        "entity_id": "group.outdoors",
+        "x": 660,
+        "y": 285,
+        "wires": [
+            [
+                "7ed5bca.5accd44",
+                "3a627ea0.e88032"
+            ]
+        ]
+    },
+    {
+        "id": "3a627ea0.e88032",
+        "type": "delay",
+        "z": "b2e345b7.0f3fa8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 490,
+        "y": 330,
+        "wires": [
+            [
+                "acbf2af9.f71a08"
+            ]
+        ]
+    },
+    {
+        "id": "6a87f512.f65bfc",
+        "type": "api-call-service",
+        "z": "b2e345b7.0f3fa8",
+        "name": "Mandy",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_mandys_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 935,
+        "y": 330,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "43c6abca.ce6fb4",
+        "type": "server",
+        "z": "",
+        "name": "Home Assistant",
+        "legacy": false
+    }
+]
