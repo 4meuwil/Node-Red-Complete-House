@@ -24,7 +24,7 @@ automation:
   condition: []
   action:
   - data:
-      addon: a0d7b954_nodered
+      addon: YOUR_NODE_RED_ADDON_ADDRESS - found in address bar of addon details page - /hassio/addon/"-----"_nodered
     service: hassio.addon_restart
   - data:
       message: Node Red was Restarted!
