@@ -1,0 +1,20 @@
+homeassistant:
+  auth_providers:
+   - type: homeassistant
+   - type: legacy_api_password
+  name: ' '
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: !secret home_elevation
+  unit_system: !secret unit_system
+  time_zone: !secret time_zone
+  customize: !include customize.yaml
+  customize_glob: !include customize_glob.yaml
+  packages:
+    backyard: !include backyard.yaml
+    blueiris: !include blueiris.yaml
+    climate: !include climate.yaml
+    housemodes: !include housemodes.yaml
+    presence: !include presence.yaml
+    security: !include security.yaml
+    watchdog: !include watchdog.yaml
