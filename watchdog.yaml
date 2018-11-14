@@ -1,0 +1,55 @@
+homeassistant:
+  customize:
+    input_boolean.alarm_check:
+      hidden: true
+    input_boolean.camera_check:
+      hidden: true
+    input_boolean.node_red:
+      hidden: true
+    input_boolean.tempsensor_check:
+      hidden: true
+    input_boolean.house_check:
+      hidden: true
+
+## Force Node Red Add-on Restart If It Stops Responding
+automation:
+- id: node_red_watchdog
+  alias: Node Red Watchdog
+  initial_state: true
+  trigger:
+  - entity_id: sensor.node_red
+    platform: state
+    from: OK
+    to: unknown
+  condition: []
+  action:
+  - data:
+      addon: a0d7b954_nodered
+    service: hassio.addon_restart
+  - data:
+      message: Node Red was Restarted!
+    service: notify.ios_jakes_iphone
+
+input_boolean:
+  alarm_check:
+    name: Alarm Modules Watchdog
+    initial: off
+  camera_check:
+    name: IP Camera Check Watchdog
+    initial: off
+  node_red:
+    name: Node Red Stability Watchdog
+    initial: on
+  tempsensor_check:
+    name: Temp Sensor Modules Watchdog
+    initial: off 
+  house_check:
+    name: House Check Activation
+    initial: off  
+    
+sensor: 
+  - platform: mqtt
+    name: "Node RED"
+    state_topic: "checkIn/nodeRED"
+    expire_after: 300
+

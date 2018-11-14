@@ -1,0 +1,53 @@
+## mjpeg: http://BLUEIRISIP:PORT/mjpg/CAMSHORTNAME
+
+camera:
+ - platform: mjpeg
+   mjpeg_url: !secret blueiris_cam1
+   name: Porch
+   username: !secret blueiris_user
+   password: !secret blueiris_password
+   authentication: basic
+   framerate: 15
+
+ - platform: mjpeg
+   mjpeg_url: !secret blueiris_cam2
+   name: Frontyard
+   username: !secret blueiris_user
+   password: !secret blueiris_password
+   authentication: basic
+   framerate: 15
+
+ - platform: mjpeg
+   mjpeg_url: !secret blueiris_cam3
+   name: Sideyard
+   username: !secret blueiris_user
+   password: !secret blueiris_password
+   authentication: basic
+   framerate: 15
+
+ - platform: mjpeg
+   mjpeg_url: !secret blueiris_cam4
+   name: Backyard
+   username: !secret blueiris_user
+   password: !secret blueiris_password
+   authentication: basic
+   framerate: 15
+   
+ - platform: mjpeg
+   mjpeg_url: !secret blueiris_cam5
+   name: Driveway
+   username: !secret blueiris_user
+   password: !secret blueiris_password
+   authentication: basic
+   framerate: 15
+   
+group:
+  cameras:
+    name: ' '
+    control: hidden
+    entities:
+     - camera.porch
+     - camera.driveway
+     - camera.frontyard
+     - camera.sideyard
+     - camera.backyard

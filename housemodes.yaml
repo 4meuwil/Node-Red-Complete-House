@@ -1,0 +1,50 @@
+homeassistant:
+  customize:
+    input_boolean.bed_time:
+      hidden: true
+group:
+ housemodes:
+    name: House Modes
+    icon: mdi:home-assistant
+    control: hidden
+    entities:
+     - input_boolean.panic
+     - input_boolean.guest_mode
+     - input_boolean.garage_automation
+     - input_boolean.backyard_automation
+     - input_boolean.no_notifications
+     - input_boolean.silent_notifications
+     - input_boolean.school_alarm
+     
+input_boolean:
+  bed_time:
+    name: Bed Time
+    initial: off
+  guest_mode:
+    name: Guest Mode
+    initial: off
+    icon: mdi:lock
+  no_notifications:
+    name: Disable Notifications
+    initial: off
+    icon: mdi:cellphone-wireless
+  panic:
+    name: Panic!
+    icon: mdi:alert-box
+    initial: off
+  school_alarm:
+    name: School Alarm
+    icon: mdi:bell-ring
+    initial: on    
+  silent_notifications:
+    name: Silent Notifications
+    initial: off
+    icon: mdi:vibrate
+  
+
+
+    
+    
+    
+    
+    
