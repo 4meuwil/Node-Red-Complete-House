@@ -6,7 +6,7 @@ homeassistant:
       icon: mdi:door
     binary_sensor.kitchen_door:
       icon: mdi:door
-    input_boolean.eagle:
+    input_boolean.YOURSECRETDISARMBOOLEAN:
       hidden: true  
     input_boolean.fam_leaving:
       hidden: true      
@@ -89,8 +89,8 @@ group:
 
 input_boolean:
 ## Alexa Passprase Triggers to Arm_Away/Disarm System
-  eagle:
-    name: Eagle
+  YOURSECRETDISARMBOOLEAN:
+    name: SECRETDISARMBOOLEAN
     initial: off
   fam_leaving:
     name: Family Leaving
