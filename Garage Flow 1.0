@@ -1,0 +1,795 @@
+[
+    {
+        "id": "9be4500.95e93b",
+        "type": "tab",
+        "label": "Garage / Lights",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "336f618e.fc7aae",
+        "type": "server-state-changed",
+        "z": "9be4500.95e93b",
+        "name": "Door Open",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "cover.garage_door",
+        "entityidfiltertype": "substring",
+        "haltifstate": "closed",
+        "x": 75,
+        "y": 75,
+        "wires": [
+            [
+                "5c84bb9d.d2b804"
+            ]
+        ]
+    },
+    {
+        "id": "7fbba98d.0c6828",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Notify Jake",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_jakes_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 790,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5af51dd8.6013a4",
+        "type": "delay",
+        "z": "9be4500.95e93b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "15",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 295,
+        "y": 120,
+        "wires": [
+            [
+                "92191f67.5cfb1"
+            ]
+        ]
+    },
+    {
+        "id": "5683c426.f1ce0c",
+        "type": "time-range-switch",
+        "z": "9be4500.95e93b",
+        "name": "",
+        "lat": "35.225286",
+        "lon": "-89.837599",
+        "startTime": "20:00",
+        "endTime": "06:00",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 655,
+        "y": 225,
+        "wires": [
+            [
+                "b733e3.a878dc2"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b733e3.a878dc2",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Close Door",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "cover",
+        "service": "close_cover",
+        "data": "{   \"entity_id\": \"cover.garage_door\" }",
+        "mergecontext": "",
+        "x": 655,
+        "y": 270,
+        "wires": [
+            [
+                "bf7b73d2.a482",
+                "803bf991.59fd88"
+            ]
+        ]
+    },
+    {
+        "id": "bf7b73d2.a482",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Jake",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_jakes_iphone",
+        "data": "{\"message\":\"It's Late, I Closed the Garage!\"}",
+        "mergecontext": "",
+        "x": 830,
+        "y": 255,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6e66e29b.28f28c",
+        "type": "time-range-switch",
+        "z": "9be4500.95e93b",
+        "name": "",
+        "lat": "35.225286",
+        "lon": "-89.837599",
+        "startTime": "20:00",
+        "endTime": "06:00",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 250,
+        "y": 510,
+        "wires": [
+            [
+                "c26fe1e0.483e9",
+                "56f4417d.950c9"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e265aca.cabb05",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Island On",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "homeassistant",
+        "service": "turn_on",
+        "data": "{   \"entity_id\": \"switch.kitchen_island\" }",
+        "mergecontext": "",
+        "x": 600,
+        "y": 510,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5f7657ce.ad7508",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Alexa Kitchen",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "media_player",
+        "service": "alexa_tts",
+        "data": "{\"entity_id\": \"media_player.kitchen_echo\", \"message\": \"Attention, the garage door is open\"}",
+        "mergecontext": "",
+        "x": 665,
+        "y": 75,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5c84bb9d.d2b804",
+        "type": "api-current-state",
+        "z": "9be4500.95e93b",
+        "name": "Auto On?",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": true,
+        "override_payload": true,
+        "entity_id": "input_boolean.garage_automation",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "5af51dd8.6013a4"
+            ]
+        ]
+    },
+    {
+        "id": "23e33ff3.0da72",
+        "type": "function",
+        "z": "9be4500.95e93b",
+        "name": "Data",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Garage Door Has Been Open 15 Minutes',\n    \"data\": \n    {\n      \"push\": \n      {\n        \"badge\": 0,\n        \"category\": \"garage\",\n        \"sound\": \"US-EN-Daisy-Garage-Door-Open.wav\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 635,
+        "y": 120,
+        "wires": [
+            [
+                "7fbba98d.0c6828",
+                "9606c8d4.578948"
+            ]
+        ]
+    },
+    {
+        "id": "2c5ff3f5.51c8dc",
+        "type": "function",
+        "z": "9be4500.95e93b",
+        "name": "Data",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Garage Door Has Been Open 30 Minutes',\n    \"data\": \n    {\n      \"push\": \n      {\n        \"badge\": 0,\n        \"category\": \"garage\",\n        \"sound\": \"US-EN-Daisy-Garage-Door-Open.wav\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 635,
+        "y": 150,
+        "wires": [
+            [
+                "7fbba98d.0c6828",
+                "9606c8d4.578948"
+            ]
+        ]
+    },
+    {
+        "id": "8836f495.747d48",
+        "type": "delay",
+        "z": "9be4500.95e93b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "15",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 295,
+        "y": 165,
+        "wires": [
+            [
+                "87145c3a.c7121"
+            ]
+        ]
+    },
+    {
+        "id": "262f8d46.2b72d2",
+        "type": "api-current-state",
+        "z": "9be4500.95e93b",
+        "name": "Door State",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "closed",
+        "override_topic": true,
+        "override_payload": true,
+        "entity_id": "cover.garage_door",
+        "x": 460,
+        "y": 210,
+        "wires": [
+            [
+                "c475ba45.d3b098",
+                "5683c426.f1ce0c",
+                "ed6aa246.db28b"
+            ]
+        ]
+    },
+    {
+        "id": "c475ba45.d3b098",
+        "type": "function",
+        "z": "9be4500.95e93b",
+        "name": "Data",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Garage Door Has Been Open 45 Minutes',\n    \"data\": \n    {\n      \"push\": \n      {\n        \"badge\": 0,\n        \"category\": \"garage\",\n        \"sound\": \"US-EN-Daisy-Garage-Door-Open.wav\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 635,
+        "y": 180,
+        "wires": [
+            [
+                "7fbba98d.0c6828",
+                "9606c8d4.578948"
+            ]
+        ]
+    },
+    {
+        "id": "4ebb693a.528708",
+        "type": "delay",
+        "z": "9be4500.95e93b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "15",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 295,
+        "y": 210,
+        "wires": [
+            [
+                "262f8d46.2b72d2"
+            ]
+        ]
+    },
+    {
+        "id": "9b1ce4a6.fea718",
+        "type": "server-state-changed",
+        "z": "9be4500.95e93b",
+        "name": "Garage Auto",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "input_boolean.garage_automation",
+        "entityidfiltertype": "substring",
+        "haltifstate": "on",
+        "x": 85,
+        "y": 375,
+        "wires": [
+            [
+                "a2991a66.ee7168"
+            ]
+        ]
+    },
+    {
+        "id": "a2991a66.ee7168",
+        "type": "delay",
+        "z": "9be4500.95e93b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "4",
+        "timeoutUnits": "hours",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 240,
+        "y": 375,
+        "wires": [
+            [
+                "ac1fd419.4ff648"
+            ]
+        ]
+    },
+    {
+        "id": "ac1fd419.4ff648",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Turn Auto On",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "input_boolean",
+        "service": "turn_on",
+        "data": "{   \"entity_id\": \"input_boolean.garage_automation\" }",
+        "mergecontext": "",
+        "x": 410,
+        "y": 375,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7480b5fb.04496c",
+        "type": "api-current-state",
+        "z": "9be4500.95e93b",
+        "name": "Auto On?",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": true,
+        "override_payload": true,
+        "entity_id": "input_boolean.garage_automation",
+        "x": 150,
+        "y": 165,
+        "wires": [
+            [
+                "8836f495.747d48"
+            ]
+        ]
+    },
+    {
+        "id": "6b16c0ca.ea495",
+        "type": "api-current-state",
+        "z": "9be4500.95e93b",
+        "name": "Auto On?",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": true,
+        "override_payload": true,
+        "entity_id": "input_boolean.garage_automation",
+        "x": 150,
+        "y": 210,
+        "wires": [
+            [
+                "4ebb693a.528708"
+            ]
+        ]
+    },
+    {
+        "id": "783de104.ba87a",
+        "type": "server-state-changed",
+        "z": "9be4500.95e93b",
+        "name": "Garage Open",
+        "server": "43c6abca.ce6fb4",
+        "entityidfilter": "cover.garage_door",
+        "entityidfiltertype": "substring",
+        "haltifstate": "closed",
+        "x": 85,
+        "y": 510,
+        "wires": [
+            [
+                "6e66e29b.28f28c"
+            ]
+        ]
+    },
+    {
+        "id": "ed6aa246.db28b",
+        "type": "api-current-state",
+        "z": "9be4500.95e93b",
+        "name": "Auto On?",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "off",
+        "override_topic": true,
+        "override_payload": true,
+        "entity_id": "input_boolean.garage_automation",
+        "x": 150,
+        "y": 255,
+        "wires": [
+            [
+                "d0721cd4.85224"
+            ]
+        ]
+    },
+    {
+        "id": "d0721cd4.85224",
+        "type": "delay",
+        "z": "9be4500.95e93b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "15",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 295,
+        "y": 255,
+        "wires": [
+            [
+                "fab1efd6.125af"
+            ]
+        ]
+    },
+    {
+        "id": "fab1efd6.125af",
+        "type": "api-current-state",
+        "z": "9be4500.95e93b",
+        "name": "Door State",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "closed",
+        "override_topic": true,
+        "override_payload": true,
+        "entity_id": "cover.garage_door",
+        "x": 460,
+        "y": 255,
+        "wires": [
+            [
+                "686f04d.d87d0fc"
+            ]
+        ]
+    },
+    {
+        "id": "686f04d.d87d0fc",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Close Door",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "cover",
+        "service": "close_cover",
+        "data": "{   \"entity_id\": \"cover.garage_door\" }",
+        "mergecontext": "",
+        "x": 655,
+        "y": 315,
+        "wires": [
+            [
+                "ecdf75cc.904798",
+                "dea9f0d7.29a7f"
+            ]
+        ]
+    },
+    {
+        "id": "ecdf75cc.904798",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Jake",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_jakes_iphone",
+        "data": "{ \"message\": \"I Closed the Garage!\" }",
+        "mergecontext": "",
+        "x": 830,
+        "y": 330,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c26fe1e0.483e9",
+        "type": "function",
+        "z": "9be4500.95e93b",
+        "name": "Data",
+        "func": "msg.payload = \n{\n  \"data\": \n  {\n    \"message\":'Want Some Lights On?',\n    \"data\": \n    {\n      \"push\": \n      {\n        \"badge\": 0,\n        \"category\": \"nightlights\"\n      }\n    }\n  }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d6f24aa6.b8b9c8",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Mandy",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_mandys_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 545,
+        "y": 675,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "56f4417d.950c9",
+        "type": "time-range-switch",
+        "z": "9be4500.95e93b",
+        "name": "",
+        "lat": "35.225286",
+        "lon": "-89.837599",
+        "startTime": "22:55",
+        "endTime": "23:15",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 430,
+        "y": 510,
+        "wires": [
+            [],
+            [
+                "e265aca.cabb05"
+            ]
+        ]
+    },
+    {
+        "id": "87145c3a.c7121",
+        "type": "api-current-state",
+        "z": "9be4500.95e93b",
+        "name": "Door State",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "closed",
+        "override_topic": true,
+        "override_payload": true,
+        "entity_id": "cover.garage_door",
+        "x": 460,
+        "y": 165,
+        "wires": [
+            [
+                "2c5ff3f5.51c8dc",
+                "5f7657ce.ad7508",
+                "6b16c0ca.ea495"
+            ]
+        ]
+    },
+    {
+        "id": "92191f67.5cfb1",
+        "type": "api-current-state",
+        "z": "9be4500.95e93b",
+        "name": "Door State",
+        "server": "43c6abca.ce6fb4",
+        "halt_if": "closed",
+        "override_topic": true,
+        "override_payload": true,
+        "entity_id": "cover.garage_door",
+        "x": 460,
+        "y": 120,
+        "wires": [
+            [
+                "23e33ff3.0da72",
+                "5f7657ce.ad7508",
+                "7480b5fb.04496c"
+            ]
+        ]
+    },
+    {
+        "id": "d09a0dcb.d5cb6",
+        "type": "comment",
+        "z": "9be4500.95e93b",
+        "name": "Door Open Alerts, Notifications, Automation",
+        "info": "",
+        "x": 185,
+        "y": 30,
+        "wires": []
+    },
+    {
+        "id": "78233736.01daf8",
+        "type": "comment",
+        "z": "9be4500.95e93b",
+        "name": "Garage Auto Mode Reset",
+        "info": "",
+        "x": 125,
+        "y": 330,
+        "wires": []
+    },
+    {
+        "id": "888450fd.410b1",
+        "type": "comment",
+        "z": "9be4500.95e93b",
+        "name": "Garage Night Light Trigger",
+        "info": "",
+        "x": 125,
+        "y": 465,
+        "wires": []
+    },
+    {
+        "id": "9606c8d4.578948",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Notify Mandy",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_mandys_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 790,
+        "y": 165,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "803bf991.59fd88",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Mandy",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_mandys_iphone",
+        "data": "{\"message\":\"It's Late, I Closed the Garage!\"}",
+        "mergecontext": "",
+        "x": 830,
+        "y": 285,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dea9f0d7.29a7f",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Mandy",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_mandys_iphone",
+        "data": "{ \"message\": \"I Closed the Garage!\" }",
+        "mergecontext": "",
+        "x": 830,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e7bfd0bc.aaef9",
+        "type": "api-call-service",
+        "z": "9be4500.95e93b",
+        "name": "Jake",
+        "server": "43c6abca.ce6fb4",
+        "service_domain": "notify",
+        "service": "ios_jakes_iphone",
+        "data": "{}",
+        "mergecontext": "",
+        "x": 545,
+        "y": 630,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "153129af.7202b6",
+        "type": "change",
+        "z": "9be4500.95e93b",
+        "name": "reset",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 395,
+        "y": 75,
+        "wires": [
+            [
+                "5af51dd8.6013a4",
+                "8836f495.747d48",
+                "4ebb693a.528708",
+                "d0721cd4.85224"
+            ]
+        ]
+    },
+    {
+        "id": "2c4fb263.f8a3fe",
+        "type": "trigger-state",
+        "z": "9be4500.95e93b",
+        "name": "Closed",
+        "server": "43c6abca.ce6fb4",
+        "entityid": "cover.garage_door",
+        "debugenabled": false,
+        "constraints": [
+            {
+                "id": "yk6d68lun9",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "current_state",
+                "propertyValue": "new_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "closed"
+            },
+            {
+                "id": "ofy6skayz5",
+                "targetType": "this_entity",
+                "targetValue": "",
+                "propertyType": "previous_state",
+                "propertyValue": "old_state.state",
+                "comparatorType": "is",
+                "comparatorValueDatatype": "str",
+                "comparatorValue": "open"
+            }
+        ],
+        "constraintsmustmatch": "all",
+        "outputs": 2,
+        "customoutputs": [],
+        "outputinitially": false,
+        "x": 255,
+        "y": 75,
+        "wires": [
+            [
+                "153129af.7202b6"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "1700f145.5f72df",
+        "type": "comment",
+        "z": "9be4500.95e93b",
+        "name": "specific time I don't want the automation",
+        "info": "",
+        "x": 435,
+        "y": 465,
+        "wires": []
+    },
+    {
+        "id": "9fa1e01b.b7fea",
+        "type": "comment",
+        "z": "9be4500.95e93b",
+        "name": "future actionable notofications",
+        "info": "",
+        "x": 450,
+        "y": 585,
+        "wires": []
+    },
+    {
+        "id": "43c6abca.ce6fb4",
+        "type": "server",
+        "z": "",
+        "name": "Home Assistant",
+        "legacy": false
+    }
+]
